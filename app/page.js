@@ -245,6 +245,126 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════════ S1-2. 유튜브 섹션 ═══════════ */}
+      <section className="py-20 md:py-28" style={{ backgroundColor: COLORS.white }}>
+        <div className="max-w-5xl mx-auto px-6 md:px-8">
+          {/* 헤더 */}
+          <div className="text-center mb-12">
+            <p className="text-sm font-medium mb-2" style={{ color: COLORS.primary }}>
+              MEET FIRST
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: COLORS.text }}>
+              상담 전, 영상으로 먼저 만나보세요
+            </h2>
+            <p className="text-base" style={{ color: COLORS.textLight }}>
+              어떤 변호사인지 미리 확인하고 상담하세요
+            </p>
+          </div>
+
+          {/* 대표 영상 */}
+          <div className="mb-8">
+            <div
+              className="relative w-full aspect-video rounded-2xl overflow-hidden"
+              style={{ backgroundColor: COLORS.bg }}
+            >
+              <iframe
+                src="https://www.youtube.com/embed/FfmtVR9BQ_4"
+                title="조아라 변호사 대표 영상"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </div>
+
+          {/* 주제별 영상 썸네일 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              {
+                id: "LlkoShrE6pU",
+                title: "재산분할",
+                desc: "숨긴 재산 찾는 법",
+                icon: Scale,
+              },
+              {
+                id: "MigyrrJ8UVY",
+                title: "상간소송",
+                desc: "증거 없이도 가능할까?",
+                icon: Gavel,
+              },
+              {
+                id: "o7_VRL3seVQ",
+                title: "양육비·양육권",
+                desc: "확실하게 받는 방법",
+                icon: Users,
+              },
+            ].map((video) => (
+              <a
+                key={video.id}
+                href={`https://youtu.be/${video.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
+                style={{ border: `1px solid ${COLORS.border}` }}
+              >
+                {/* 썸네일 */}
+                <div className="relative aspect-video bg-gray-100">
+                  <img
+                    src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                    alt={video.title}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* 재생 버튼 오버레이 */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-all duration-300">
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                      style={{ backgroundColor: COLORS.primary }}
+                    >
+                      <svg
+                        className="w-5 h-5 text-white ml-0.5"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                {/* 정보 */}
+                <div className="p-4" style={{ backgroundColor: COLORS.white }}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <video.icon size={16} style={{ color: COLORS.primary }} />
+                    <span className="text-sm font-semibold" style={{ color: COLORS.text }}>
+                      {video.title}
+                    </span>
+                  </div>
+                  <p className="text-sm" style={{ color: COLORS.textLight }}>
+                    {video.desc}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* 유튜브 채널 링크 */}
+          <div className="text-center mt-10">
+            <a
+              href="https://www.youtube.com/@%EC%B0%BD%EC%9B%90%EB%B3%80%ED%98%B8%EC%82%AC%EC%A1%B0%EC%95%84%EB%9D%BC"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-80"
+              style={{
+                backgroundColor: COLORS.primaryBg,
+                color: COLORS.primary,
+              }}
+            >
+              <Youtube size={18} />
+              유튜브 채널에서 더 많은 영상 보기
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════ S2. 문제 공감 ═══════════ */}
       <section className="py-20 md:py-28" style={{ backgroundColor: COLORS.bg }}>
         <div className="max-w-4xl mx-auto px-6 md:px-8">
