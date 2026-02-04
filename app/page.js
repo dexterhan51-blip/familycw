@@ -247,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════ S1-2. 유튜브 섹션 ═══════════ */}
-      <section id="youtube" className="py-20 md:py-28" style={{ backgroundColor: COLORS.white }}
+      <section id="youtube" className="py-20 md:py-28" style={{ backgroundColor: COLORS.white }}>
         <div className="max-w-5xl mx-auto px-6 md:px-8">
           {/* 헤더 */}
           <div className="text-center mb-12">
