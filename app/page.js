@@ -187,19 +187,20 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* 하단 태그 */}
+              {/* 하단 태그 - 클릭시 유튜브 섹션으로 이동 */}
               <div className="flex flex-wrap gap-2">
                 {["재산분할", "상간소송", "양육권", "채무조정"].map((tag, i) => (
-                  <span
+                  <button
                     key={i}
-                    className="px-3 py-1.5 rounded-lg text-sm"
+                    onClick={() => scrollToSection("youtube")}
+                    className="px-3 py-1.5 rounded-lg text-sm transition-all duration-300 hover:opacity-70 cursor-pointer"
                     style={{
                       backgroundColor: COLORS.bg,
                       color: COLORS.textLight,
                     }}
                   >
                     {tag}
-                  </span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -246,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════ S1-2. 유튜브 섹션 ═══════════ */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: COLORS.white }}>
+      <section id="youtube" className="py-20 md:py-28" style={{ backgroundColor: COLORS.white }}
         <div className="max-w-5xl mx-auto px-6 md:px-8">
           {/* 헤더 */}
           <div className="text-center mb-12">
