@@ -24,9 +24,10 @@ import {
 
 /* ── 색상 상수 ── */
 const COLORS = {
-  primary: "#1e3a5f",      // 딥 네이비 - 포인트 컬러
-  primaryLight: "#2d4a6f", // 밝은 네이비
-  primaryBg: "#f0f4f8",    // 아주 연한 네이비 배경
+  primary: "#1e3a5f",      // 딥 네이비 - 헤더, CTA 띠, 상담폼 배경
+  accent: "#5eb5e4",       // 스카이블루 - 버튼, 태그, 강조 포인트
+  accentLight: "#e8f4fb",  // 연한 스카이블루 - 아이콘/라벨 배경
+  primaryBg: "#f0f4f8",    // 아주 연한 배경
   text: "#1a1a1a",         // 본문 텍스트
   textLight: "#666666",    // 보조 텍스트
   textMuted: "#999999",    // 희미한 텍스트
@@ -41,8 +42,8 @@ function FAQItem({ question, answer, isOpen, onClick }) {
     <div
       className="rounded-2xl overflow-hidden transition-all duration-300"
       style={{
-        backgroundColor: isOpen ? COLORS.primaryBg : COLORS.white,
-        border: isOpen ? `1px solid ${COLORS.primary}` : `1px solid ${COLORS.border}`,
+        backgroundColor: isOpen ? COLORS.accentLight : COLORS.white,
+        border: isOpen ? `1px solid ${COLORS.accent}` : `1px solid ${COLORS.border}`,
       }}
     >
       <button
@@ -54,14 +55,14 @@ function FAQItem({ question, answer, isOpen, onClick }) {
         <ChevronDown
           size={20}
           className={`flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-          style={{ color: isOpen ? COLORS.primary : COLORS.textMuted }}
+          style={{ color: isOpen ? COLORS.accent : COLORS.textMuted }}
         />
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96" : "max-h-0"}`}>
         <p
           className="px-5 md:px-6 pb-5 md:pb-6 text-sm leading-relaxed"
           style={{ color: COLORS.textLight }}
-          dangerouslySetInnerHTML={{ __html: answer.replace(/#c9a227/g, COLORS.primary) }}
+          dangerouslySetInnerHTML={{ __html: answer.replace(/#c9a227/g, COLORS.accent) }}
         />
       </div>
     </div>
@@ -98,27 +99,27 @@ export default function Home() {
     {
       question: "이혼 상담을 받고 싶은데, 주변이나 가족에게 알려질까 봐 걱정돼요.",
       answer:
-        `모든 상담은 변호사법에 따라 <strong style="color:${COLORS.primary};">철저히 비밀이 보장</strong>됩니다. 기록이 남지 않는 보안 시스템을 운영하며, 가족이나 직장에 알려지지 않도록 안심하고 상담받으실 수 있는 환경을 약속드립니다.`,
+        `모든 상담은 변호사법에 따라 <strong style="color:${COLORS.accent};">철저히 비밀이 보장</strong>됩니다. 기록이 남지 않는 보안 시스템을 운영하며, 가족이나 직장에 알려지지 않도록 안심하고 상담받으실 수 있는 환경을 약속드립니다.`,
     },
     {
       question: "창원 지역 변호사를 꼭 찾아야 하는 이유가 있나요?",
       answer:
-        `이혼/상간 소송은 지역 법원마다의 판결 성향과 위자료 기준이 미묘하게 다릅니다. 저희는 <strong style="color:${COLORS.primary};">창원 성산구에서 창원지방법원의 특성을 가장 잘 이해</strong>하고 있는 지역 밀착형 전문가로서 최적의 전략을 제시합니다.`,
+        `이혼/상간 소송은 지역 법원마다의 판결 성향과 위자료 기준이 미묘하게 다릅니다. 저희는 <strong style="color:${COLORS.accent};">창원 성산구에서 창원지방법원의 특성을 가장 잘 이해</strong>하고 있는 지역 밀착형 전문가로서 최적의 전략을 제시합니다.`,
     },
     {
       question: "남편이 빚만 몇 억이라는데, 제가 대신 갚아야 하거나 재산을 못 받을까 봐 무서워요.",
       answer:
-        `배우자의 은닉 재산(예금, 부동산, 주식 등)은 <strong style="color:${COLORS.primary};">법적 절차로 끝까지 찾아내며</strong>, 혼인 중 형성된 빚은 철저히 따져 의뢰인에게 부당한 책임이 전가되지 않도록 당신의 정당한 재산권을 지켜드립니다.`,
+        `배우자의 은닉 재산(예금, 부동산, 주식 등)은 <strong style="color:${COLORS.accent};">법적 절차로 끝까지 찾아내며</strong>, 혼인 중 형성된 빚은 철저히 따져 의뢰인에게 부당한 책임이 전가되지 않도록 당신의 정당한 재산권을 지켜드립니다.`,
     },
     {
       question: "증거가 하나도 없는데 승소할 수 있을까요?",
       answer:
-        `물증이 부족하더라도 <strong style="color:${COLORS.primary};">정황 증거와 법적 조력을 통한 사실조회 신청</strong>으로 충분히 입증 가능합니다. 불법적인 증거 수집으로 피해를 보지 않도록, 안전하고 확실한 증거 확보를 처음부터 끝까지 도와드립니다.`,
+        `물증이 부족하더라도 <strong style="color:${COLORS.accent};">정황 증거와 법적 조력을 통한 사실조회 신청</strong>으로 충분히 입증 가능합니다. 불법적인 증거 수집으로 피해를 보지 않도록, 안전하고 확실한 증거 확보를 처음부터 끝까지 도와드립니다.`,
     },
     {
       question: "변호사 선임 비용이 너무 비싸지는 않을까요?",
       answer:
-        `<strong style="color:${COLORS.primary};">투명하고 합리적인 수임 제도</strong>를 운영하고 있습니다. 사건 난이도에 맞는 정직한 비용을 안내해 드리며, 승소 시 상대방에게 변호사 비용을 청구하여 의뢰인의 경제적 부담을 최소화하는 전략도 함께 세워드립니다.`,
+        `<strong style="color:${COLORS.accent};">투명하고 합리적인 수임 제도</strong>를 운영하고 있습니다. 사건 난이도에 맞는 정직한 비용을 안내해 드리며, 승소 시 상대방에게 변호사 비용을 청구하여 의뢰인의 경제적 부담을 최소화하는 전략도 함께 세워드립니다.`,
     },
   ]
 
@@ -135,8 +136,8 @@ export default function Home() {
               <span
                 className="inline-block px-4 py-2 rounded-full text-xs font-medium tracking-wide mb-8"
                 style={{
-                  color: COLORS.primary,
-                  backgroundColor: COLORS.primaryBg,
+                  color: COLORS.accent,
+                  backgroundColor: COLORS.accentLight,
                 }}
               >
                 이혼 · 상간 전문 변호사
@@ -149,7 +150,7 @@ export default function Home() {
               >
                 감정은 덜어내고,
                 <br />
-                <span style={{ color: COLORS.primary }}>팩트로 승부합니다.</span>
+                <span style={{ color: COLORS.accent }}>팩트로 승부합니다.</span>
               </h1>
 
               {/* 서브 카피 */}
@@ -168,7 +169,7 @@ export default function Home() {
                   href="tel:055-266-7200"
                   className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:opacity-90"
                   style={{
-                    backgroundColor: COLORS.primary,
+                    backgroundColor: COLORS.accent,
                     color: COLORS.white,
                   }}
                 >
@@ -196,8 +197,8 @@ export default function Home() {
                     onClick={() => scrollToSection("youtube")}
                     className="px-3 py-1.5 rounded-lg text-sm transition-all duration-300 hover:opacity-70 cursor-pointer"
                     style={{
-                      backgroundColor: COLORS.bg,
-                      color: COLORS.textLight,
+                      backgroundColor: COLORS.accentLight,
+                      color: COLORS.accent,
                     }}
                   >
                     {tag}
@@ -226,7 +227,7 @@ export default function Home() {
                 />
                 <div
                   className="placeholder absolute inset-0 items-center justify-center hidden"
-                  style={{ backgroundColor: COLORS.primaryBg }}
+                  style={{ backgroundColor: COLORS.accentLight }}
                 >
                   <div className="text-center">
                     <p className="text-sm mb-2" style={{ color: COLORS.textMuted }}>이미지 위치</p>
@@ -252,7 +253,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 md:px-8">
           {/* 헤더 */}
           <div className="text-center mb-12">
-            <p className="text-sm font-medium mb-2" style={{ color: COLORS.primary }}>
+            <p className="text-sm font-medium mb-2" style={{ color: COLORS.accent }}>
               MEET FIRST
             </p>
             <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: COLORS.text }}>
@@ -268,24 +269,28 @@ export default function Home() {
             {[
               {
                 id: "FfmtVR9BQ_4",
+                url: "https://go.knp-law.com/4ko6jLE",
                 title: "이혼절차 총정리",
                 desc: "이혼 전 꼭 알아야 할 절차, 변호사가 직접 설명해 드립니다",
                 icon: FileText,
               },
               {
                 id: "LlkoShrE6pU",
+                url: "https://go.knp-law.com/4qqfpZN",
                 title: "재산분할",
                 desc: "12억 남편 vs 200만 원 아내, 재산분할 충격 결과는?",
                 icon: Scale,
               },
               {
                 id: "MigyrrJ8UVY",
+                url: "https://go.knp-law.com/4r4OaoG",
                 title: "상간소송",
                 desc: "내가 받을 수 있는 위자료는 얼마일까? 금액 산정 기준의 모든 것",
                 icon: Gavel,
               },
               {
                 id: "o7_VRL3seVQ",
+                url: "https://go.knp-law.com/4ayWpU1",
                 title: "양육비·양육권",
                 desc: "양육비 줄 돈은 없다더니 카드값은 200? 양육비 안 주는 전남편 대처법",
                 icon: Users,
@@ -293,7 +298,7 @@ export default function Home() {
             ].map((video) => (
               <a
                 key={video.id}
-                href={`https://youtu.be/${video.id}`}
+                href={video.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
@@ -310,7 +315,7 @@ export default function Home() {
                   <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-all duration-300">
                     <div
                       className="w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                      style={{ backgroundColor: COLORS.primary }}
+                      style={{ backgroundColor: COLORS.accent }}
                     >
                       <svg
                         className="w-5 h-5 text-white ml-0.5"
@@ -325,7 +330,7 @@ export default function Home() {
                 {/* 정보 */}
                 <div className="p-4" style={{ backgroundColor: COLORS.white }}>
                   <div className="flex items-center gap-2 mb-1">
-                    <video.icon size={16} style={{ color: COLORS.primary }} />
+                    <video.icon size={16} style={{ color: COLORS.accent }} />
                     <span className="text-sm font-semibold" style={{ color: COLORS.text }}>
                       {video.title}
                     </span>
@@ -341,13 +346,13 @@ export default function Home() {
           {/* 유튜브 채널 링크 */}
           <div className="text-center mt-10">
             <a
-              href="https://www.youtube.com/@%EC%B0%BD%EC%9B%90%EB%B3%80%ED%98%B8%EC%82%AC%EC%A1%B0%EC%95%84%EB%9D%BC"
+              href="https://go.knp-law.com/46zmnUZ"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-80"
               style={{
-                backgroundColor: COLORS.primaryBg,
-                color: COLORS.primary,
+                backgroundColor: COLORS.accentLight,
+                color: COLORS.accent,
               }}
             >
               <Youtube size={18} />
@@ -362,7 +367,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 md:px-8">
           {/* 헤더 */}
           <div className="text-center mb-14">
-            <p className="text-base md:text-lg mb-3" style={{ color: COLORS.primary }}>
+            <p className="text-base md:text-lg mb-3" style={{ color: COLORS.accent }}>
               지금 이 순간에도
             </p>
             <h2 className="text-2xl md:text-3xl font-bold" style={{ color: COLORS.text }}>
@@ -423,7 +428,7 @@ export default function Home() {
                     <div className="flex items-center gap-2 mb-2">
                       <span
                         className="w-6 h-6 rounded-full flex items-center justify-center text-xs"
-                        style={{ backgroundColor: COLORS.primaryBg, color: COLORS.primary }}
+                        style={{ backgroundColor: COLORS.accentLight, color: COLORS.accent }}
                       >
                         익
                       </span>
@@ -457,7 +462,7 @@ export default function Home() {
                       <button
                         onClick={() => scrollToSection("consultation")}
                         className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:opacity-90"
-                        style={{ backgroundColor: COLORS.primary, color: COLORS.white }}
+                        style={{ backgroundColor: COLORS.accent, color: COLORS.white }}
                       >
                         <MessageSquare size={16} />
                         내 상황과 비슷하다면? 지금 바로 상담 신청
@@ -515,15 +520,15 @@ export default function Home() {
               >
                 <div
                   className="absolute top-6 right-6 text-5xl font-bold"
-                  style={{ color: COLORS.primaryBg }}
+                  style={{ color: COLORS.accentLight }}
                 >
                   {card.num}
                 </div>
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                  style={{ backgroundColor: COLORS.primaryBg }}
+                  style={{ backgroundColor: COLORS.accentLight }}
                 >
-                  <card.icon size={24} style={{ color: COLORS.primary }} />
+                  <card.icon size={24} style={{ color: COLORS.accent }} />
                 </div>
                 <h4 className="text-lg font-bold mb-3" style={{ color: COLORS.text }}>
                   {card.title}
@@ -541,7 +546,7 @@ export default function Home() {
       <section className="py-20 md:py-28" style={{ backgroundColor: COLORS.bg }}>
         <div className="max-w-5xl mx-auto px-6 md:px-8">
           <div className="text-center mb-6">
-            <p className="text-sm font-medium mb-2" style={{ color: COLORS.primary }}>
+            <p className="text-sm font-medium mb-2" style={{ color: COLORS.accent }}>
               REAL CASES
             </p>
             <h2 className="text-2xl md:text-3xl font-bold" style={{ color: COLORS.text }}>
@@ -590,15 +595,15 @@ export default function Home() {
                 {/* 케이스 헤더 */}
                 <div
                   className="px-6 py-4 flex items-center justify-between"
-                  style={{ backgroundColor: COLORS.primary }}
+                  style={{ backgroundColor: COLORS.bg, borderBottom: `1px solid ${COLORS.border}` }}
                 >
                   <div className="flex items-center gap-3">
-                    <caseItem.icon size={18} style={{ color: COLORS.white }} />
-                    <span className="text-sm font-semibold" style={{ color: COLORS.white }}>
+                    <caseItem.icon size={18} style={{ color: COLORS.accent }} />
+                    <span className="text-sm font-semibold" style={{ color: COLORS.text }}>
                       {caseItem.type}
                     </span>
                   </div>
-                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>
+                  <span className="text-xs" style={{ color: COLORS.textMuted }}>
                     실제 판결
                   </span>
                 </div>
@@ -627,12 +632,12 @@ export default function Home() {
                   {/* 판결 결과 */}
                   <div
                     className="p-4 rounded-xl text-center mt-auto"
-                    style={{ backgroundColor: COLORS.primaryBg, border: `1px solid ${COLORS.primary}20` }}
+                    style={{ backgroundColor: COLORS.accentLight, border: `1px solid ${COLORS.accent}30` }}
                   >
-                    <span className="block text-xs mb-1 font-semibold" style={{ color: COLORS.primary }}>
+                    <span className="block text-xs mb-1 font-semibold" style={{ color: COLORS.accent }}>
                       판결 결과
                     </span>
-                    <span className="block text-lg font-bold" style={{ color: COLORS.primary }}>
+                    <span className="block text-lg font-bold" style={{ color: COLORS.accent }}>
                       {caseItem.result}
                     </span>
                   </div>
@@ -644,13 +649,13 @@ export default function Home() {
           {/* 더 많은 성공사례 버튼 */}
           <div className="text-center mt-10">
             <a
-              href="https://family.kimnpartners.co.kr/sub/review/successful.php"
+              href="https://go.knp-law.com/4cbA2VR"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-80"
               style={{
-                backgroundColor: COLORS.primaryBg,
-                color: COLORS.primary,
+                backgroundColor: COLORS.accentLight,
+                color: COLORS.accent,
               }}
             >
               <ExternalLink size={16} />
@@ -682,7 +687,7 @@ export default function Home() {
                 />
                 <div
                   className="placeholder absolute inset-0 items-center justify-center hidden"
-                  style={{ backgroundColor: COLORS.primaryBg }}
+                  style={{ backgroundColor: COLORS.accentLight }}
                 >
                   <div className="text-center">
                     <p className="text-sm mb-2" style={{ color: COLORS.textMuted }}>이미지 위치</p>
@@ -694,7 +699,7 @@ export default function Home() {
 
             {/* 정보 */}
             <div>
-              <p className="text-sm font-medium mb-2" style={{ color: COLORS.primary }}>
+              <p className="text-sm font-medium mb-2" style={{ color: COLORS.accent }}>
                 ABOUT
               </p>
               <h2 className="text-2xl md:text-3xl font-bold mb-4 leading-snug" style={{ color: COLORS.text }}>
@@ -709,7 +714,7 @@ export default function Home() {
               >
                 <blockquote
                   className="text-base leading-relaxed"
-                  style={{ color: COLORS.textLight, borderLeft: `3px solid ${COLORS.primary}`, paddingLeft: "1rem" }}
+                  style={{ color: COLORS.textLight, borderLeft: `3px solid ${COLORS.accent}`, paddingLeft: "1rem" }}
                 >
                   "이혼은 불행이 아닙니다.
                   <br />
@@ -733,7 +738,7 @@ export default function Home() {
                     <BadgeCheck
                       size={18}
                       className="flex-shrink-0 mt-0.5"
-                      style={{ color: COLORS.primary }}
+                      style={{ color: COLORS.accent }}
                     />
                     <span className="leading-relaxed">{item}</span>
                   </li>
@@ -742,11 +747,11 @@ export default function Home() {
 
               {/* 유튜브 링크 */}
               <a
-                href="https://www.youtube.com/@%EC%B0%BD%EC%9B%90%EB%B3%80%ED%98%B8%EC%82%AC%EC%A1%B0%EC%95%84%EB%9D%BC"
+                href="https://go.knp-law.com/46zmnUZ"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-80"
-                style={{ backgroundColor: COLORS.primary, color: COLORS.white }}
+                style={{ backgroundColor: COLORS.accent, color: COLORS.white }}
               >
                 <Youtube size={18} />
                 유튜브에서 확인하기
@@ -757,14 +762,14 @@ export default function Home() {
       </section>
 
       {/* ═══════════ 긴급 CTA 띠 ═══════════ */}
-      <section className="py-10" style={{ backgroundColor: COLORS.primary }}>
+      <section className="py-10" style={{ backgroundColor: COLORS.bg, borderTop: `1px solid ${COLORS.border}`, borderBottom: `1px solid ${COLORS.border}` }}>
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left">
             <div>
-              <p className="text-sm mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <p className="text-sm mb-1" style={{ color: COLORS.textMuted }}>
                 이혼 소송, 골든타임을 놓치면
               </p>
-              <p className="text-base md:text-lg font-semibold" style={{ color: COLORS.white }}>
+              <p className="text-base md:text-lg font-semibold" style={{ color: COLORS.text }}>
                 증거도 재산도 사라집니다.
               </p>
             </div>
@@ -772,8 +777,8 @@ export default function Home() {
               href="tel:055-266-7200"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:opacity-90"
               style={{
-                backgroundColor: COLORS.white,
-                color: COLORS.primary,
+                backgroundColor: COLORS.accent,
+                color: COLORS.white,
               }}
             >
               <Phone size={18} />
@@ -830,7 +835,7 @@ export default function Home() {
                 <div
                   className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-sm md:text-base font-bold relative z-10"
                   style={{
-                    backgroundColor: COLORS.primary,
+                    backgroundColor: COLORS.accent,
                     color: COLORS.white,
                   }}
                 >
@@ -914,10 +919,10 @@ export default function Home() {
                       className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer transition-all duration-300"
                       style={{
                         backgroundColor: formData.caseTypes.includes(type)
-                          ? COLORS.primaryBg
+                          ? COLORS.accentLight
                           : COLORS.bg,
                         border: formData.caseTypes.includes(type)
-                          ? `1px solid ${COLORS.primary}`
+                          ? `1px solid ${COLORS.accent}`
                           : `1px solid ${COLORS.border}`,
                       }}
                     >
@@ -930,7 +935,7 @@ export default function Home() {
                       <span
                         className="w-5 h-5 rounded flex items-center justify-center transition-all duration-300"
                         style={{
-                          backgroundColor: formData.caseTypes.includes(type) ? COLORS.primary : "transparent",
+                          backgroundColor: formData.caseTypes.includes(type) ? COLORS.accent : "transparent",
                           border: formData.caseTypes.includes(type)
                             ? "none"
                             : `2px solid ${COLORS.border}`,
@@ -1001,7 +1006,7 @@ export default function Home() {
                 <span
                   className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 transition-all duration-300"
                   style={{
-                    backgroundColor: formData.privacyAgree ? COLORS.primary : "transparent",
+                    backgroundColor: formData.privacyAgree ? COLORS.accent : "transparent",
                     border: formData.privacyAgree ? "none" : `2px solid ${COLORS.border}`,
                   }}
                 >
@@ -1018,7 +1023,7 @@ export default function Home() {
               type="submit"
               className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-base font-semibold transition-all duration-300 hover:opacity-90"
               style={{
-                backgroundColor: COLORS.primary,
+                backgroundColor: COLORS.accent,
                 color: COLORS.white,
               }}
             >
@@ -1040,7 +1045,7 @@ export default function Home() {
       <footer className="py-12" style={{ backgroundColor: COLORS.white, borderTop: `1px solid ${COLORS.border}` }}>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <a
-            href="https://revival.kimnpartners.co.kr/"
+            href="https://go.knp-law.com/4afkhdV"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-lg font-semibold mb-4 transition-all duration-300 hover:opacity-70"
@@ -1076,7 +1081,7 @@ export default function Home() {
           href="tel:055-266-7200"
           className="flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90 shadow-lg"
           style={{
-            backgroundColor: COLORS.primary,
+            backgroundColor: COLORS.accent,
             color: COLORS.white,
           }}
         >
@@ -1084,7 +1089,7 @@ export default function Home() {
           <span className="hidden md:inline">전화상담</span>
         </a>
         <a
-          href="https://pf.kakao.com/_qFXib/chat"
+          href="https://go.knp-law.com/4a1DfGd"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90 shadow-lg"
@@ -1101,7 +1106,7 @@ export default function Home() {
           className="flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90 shadow-lg"
           style={{
             backgroundColor: COLORS.white,
-            color: COLORS.primary,
+            color: COLORS.accent,
             border: `1px solid ${COLORS.border}`,
           }}
         >
