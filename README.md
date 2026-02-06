@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Family CW
 
-## Getting Started
+가족상담 웹사이트 프로젝트
 
-First, run the development server:
+## 요구 사항
+
+- **Node.js** 18.17.0 이상
+- **npm** (Node.js와 함께 설치됨)
+
+Node.js가 설치되어 있지 않다면 [Node.js 공식 사이트](https://nodejs.org/)에서 LTS 버전을 다운로드하세요.
+
+## 설치 방법
+
+### 1. 저장소 클론
+
+```bash
+git clone https://github.com/dexterhan51-blip/familycw.git
+cd familycw
+```
+
+### 2. 의존성 설치
+
+```bash
+npm install
+```
+
+### 3. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 사용 가능한 명령어
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| 명령어 | 설명 |
+|--------|------|
+| `npm run dev` | 개발 서버 실행 (핫 리로드 지원) |
+| `npm run build` | 프로덕션 빌드 생성 |
+| `npm run start` | 프로덕션 서버 실행 |
+| `npm run lint` | 코드 린트 검사 |
 
-## Learn More
+## 기술 스택
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js](https://nextjs.org/) 16 - React 프레임워크
+- [React](https://react.dev/) 19 - UI 라이브러리
+- [Tailwind CSS](https://tailwindcss.com/) 4 - CSS 프레임워크
+- [TypeScript](https://www.typescriptlang.org/) - 타입 안정성
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 프로젝트 구조
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+family-cw/
+├── app/           # Next.js App Router 페이지
+├── public/        # 정적 파일 (이미지 등)
+├── package.json   # 프로젝트 설정 및 의존성
+└── tsconfig.json  # TypeScript 설정
+```
 
-## Deploy on Vercel
+## 문제 해결
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `npm install` 오류 시
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# node_modules 삭제 후 재설치
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### 포트 3000이 사용 중일 때
+
+```bash
+# 다른 포트로 실행
+npm run dev -- -p 3001
+```
