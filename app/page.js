@@ -71,6 +71,7 @@ function FAQItem({ question, answer, isOpen, onClick }) {
 /* ── 메인 랜딩 ── */
 export default function Home() {
   const [openFAQ, setOpenFAQ] = useState(null)
+  const [openPost, setOpenPost] = useState(null)
   const [formData, setFormData] = useState({
     caseTypes: [],
     name: "",
@@ -95,29 +96,29 @@ export default function Home() {
 
   const faqData = [
     {
-      question: "상담 내용은 비밀이 보장되나요?",
+      question: "이혼 상담을 받고 싶은데, 주변이나 가족에게 알려질까 봐 걱정돼요.",
       answer:
-        `물론입니다. 모든 상담 내용은 <strong style="color:${COLORS.primary};">변호사-의뢰인 비밀유지 의무</strong>에 따라 철저히 보호됩니다. 가족을 포함한 제3자에게 절대 알리지 않으며, 사무실 방문이 어려우실 경우 별도 장소 상담도 가능합니다.`,
+        `모든 상담은 변호사법에 따라 <strong style="color:${COLORS.primary};">철저히 비밀이 보장</strong>됩니다. 기록이 남지 않는 보안 시스템을 운영하며, 가족이나 직장에 알려지지 않도록 안심하고 상담받으실 수 있는 환경을 약속드립니다.`,
     },
     {
-      question: "배우자가 재산을 숨기거나 빼돌리면 어떻게 하나요?",
+      question: "창원 지역 변호사를 꼭 찾아야 하는 이유가 있나요?",
       answer:
-        `<strong style="color:${COLORS.primary};">법원 사실조회 제도</strong>를 활용하여 은행, 보험, 부동산, 증권 등 모든 금융자산을 조회합니다. 또한 이혼 소송 전 <strong style="color:${COLORS.primary};">재산보전 처분(가압류)</strong>을 통해 재산 은닉을 사전에 차단할 수 있습니다.`,
+        `이혼/상간 소송은 지역 법원마다의 판결 성향과 위자료 기준이 미묘하게 다릅니다. 저희는 <strong style="color:${COLORS.primary};">창원 성산구에서 창원지방법원의 특성을 가장 잘 이해</strong>하고 있는 지역 밀착형 전문가로서 최적의 전략을 제시합니다.`,
     },
     {
-      question: "증거가 부족한데 상간 소송이 가능한가요?",
+      question: "남편이 빚만 몇 억이라는데, 제가 대신 갚아야 하거나 재산을 못 받을까 봐 무서워요.",
       answer:
-        `카카오톡 메시지, 카드 내역, CCTV 등 <strong style="color:${COLORS.primary};">간접증거만으로도 승소한 사례</strong>가 다수 있습니다. 증거 수집 방법부터 소송 전략까지 체계적으로 안내해 드리며, 증거가 부족하다고 판단되더라도 상담을 통해 새로운 가능성을 찾을 수 있습니다.`,
+        `배우자의 은닉 재산(예금, 부동산, 주식 등)은 <strong style="color:${COLORS.primary};">법적 절차로 끝까지 찾아내며</strong>, 혼인 중 형성된 빚은 철저히 따져 의뢰인에게 부당한 책임이 전가되지 않도록 당신의 정당한 재산권을 지켜드립니다.`,
     },
     {
-      question: "전업주부인데 재산분할을 제대로 받을 수 있나요?",
+      question: "증거가 하나도 없는데 승소할 수 있을까요?",
       answer:
-        `대법원 판례에 따르면 전업주부의 <strong style="color:${COLORS.primary};">가사노동 기여도는 30~50%</strong>로 인정됩니다. 혼인 기간, 자녀 양육, 가사 전담 정도에 따라 기여도를 최대한 높여 주장하며, 특유재산과 공동재산을 명확히 구분하여 최대 분할을 이끌어냅니다.`,
+        `물증이 부족하더라도 <strong style="color:${COLORS.primary};">정황 증거와 법적 조력을 통한 사실조회 신청</strong>으로 충분히 입증 가능합니다. 불법적인 증거 수집으로 피해를 보지 않도록, 안전하고 확실한 증거 확보를 처음부터 끝까지 도와드립니다.`,
     },
     {
-      question: "이혼 후 빚 문제도 함께 해결할 수 있나요?",
+      question: "변호사 선임 비용이 너무 비싸지는 않을까요?",
       answer:
-        `조아라 변호사는 <strong style="color:${COLORS.primary};">이혼 전문 + 채무자회생/파산 전문</strong> 이중 자격을 보유하고 있습니다. 이혼 과정에서 발생하는 채무 문제까지 원스톱으로 해결하여, 진정한 새출발을 설계해 드립니다.`,
+        `<strong style="color:${COLORS.primary};">투명하고 합리적인 수임 제도</strong>를 운영하고 있습니다. 사건 난이도에 맞는 정직한 비용을 안내해 드리며, 승소 시 상대방에게 변호사 비용을 청구하여 의뢰인의 경제적 부담을 최소화하는 전략도 함께 세워드립니다.`,
     },
   ]
 
@@ -189,7 +190,7 @@ export default function Home() {
 
               {/* 하단 태그 - 클릭시 유튜브 섹션으로 이동 */}
               <div className="flex flex-wrap gap-2">
-                {["재산분할", "상간소송", "양육권", "채무조정"].map((tag, i) => (
+                {["이혼소송", "상간소송", "위자료", "재산분할", "양육권/양육비"].map((tag, i) => (
                   <button
                     key={i}
                     onClick={() => scrollToSection("youtube")}
@@ -262,41 +263,31 @@ export default function Home() {
             </p>
           </div>
 
-          {/* 대표 영상 */}
-          <div className="mb-8">
-            <div
-              className="relative w-full aspect-video rounded-2xl overflow-hidden"
-              style={{ backgroundColor: COLORS.bg }}
-            >
-              <iframe
-                src="https://www.youtube.com/embed/FfmtVR9BQ_4"
-                title="조아라 변호사 대표 영상"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
-            </div>
-          </div>
-
-          {/* 주제별 영상 썸네일 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* 영상 카드 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
+              {
+                id: "FfmtVR9BQ_4",
+                title: "이혼절차 총정리",
+                desc: "이혼 전 꼭 알아야 할 절차, 변호사가 직접 설명해 드립니다",
+                icon: FileText,
+              },
               {
                 id: "LlkoShrE6pU",
                 title: "재산분할",
-                desc: "숨긴 재산 찾는 법",
+                desc: "12억 남편 vs 200만 원 아내, 재산분할 충격 결과는?",
                 icon: Scale,
               },
               {
                 id: "MigyrrJ8UVY",
                 title: "상간소송",
-                desc: "증거 없이도 가능할까?",
+                desc: "내가 받을 수 있는 위자료는 얼마일까? 금액 산정 기준의 모든 것",
                 icon: Gavel,
               },
               {
                 id: "o7_VRL3seVQ",
                 title: "양육비·양육권",
-                desc: "확실하게 받는 방법",
+                desc: "양육비 줄 돈은 없다더니 카드값은 200? 양육비 안 주는 전남편 대처법",
                 icon: Users,
               },
             ].map((video) => (
@@ -366,59 +357,118 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════ S2. 문제 공감 ═══════════ */}
+      {/* ═══════════ S2. 문제 공감 (익명 게시판 스타일) ═══════════ */}
       <section className="py-20 md:py-28" style={{ backgroundColor: COLORS.bg }}>
         <div className="max-w-4xl mx-auto px-6 md:px-8">
           {/* 헤더 */}
           <div className="text-center mb-14">
             <p className="text-base md:text-lg mb-3" style={{ color: COLORS.primary }}>
-              억울해서 잠이 안 오는데,
+              지금 이 순간에도
             </p>
             <h2 className="text-2xl md:text-3xl font-bold" style={{ color: COLORS.text }}>
-              법적으로는 불리하다고요?
+              같은 고민을 하고 있는 분들이 있습니다.
             </h2>
           </div>
 
-          {/* 불안 체크리스트 */}
-          <div className="max-w-2xl mx-auto flex flex-col gap-4">
-            {[
-              { text: '"증거가 부족한데 상간 소송 가능할까요?"', icon: Search },
-              { text: '"전업주부인데 재산분할 제대로 받을 수 있나요?"', icon: Scale },
-              { text: '"남편이 재산을 숨기거나 빚만 남겨두면 어떡하죠?"', icon: Shield },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-4 px-6 py-5 rounded-2xl"
-                style={{
-                  backgroundColor: COLORS.white,
-                  border: `1px solid ${COLORS.border}`,
-                }}
-              >
-                <span
-                  className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: COLORS.primaryBg }}
+          {/* 익명 게시판 */}
+          <div
+            className="max-w-2xl mx-auto rounded-2xl overflow-hidden"
+            style={{ backgroundColor: COLORS.white, border: `1px solid ${COLORS.border}` }}
+          >
+            {/* 게시판 헤더 */}
+            <div
+              className="px-5 py-3 flex items-center justify-between"
+              style={{ backgroundColor: COLORS.bg, borderBottom: `1px solid ${COLORS.border}` }}
+            >
+              <span className="text-xs font-semibold" style={{ color: COLORS.textMuted }}>이혼 고민 게시판</span>
+              <span className="text-xs" style={{ color: COLORS.textMuted }}>오늘의 글</span>
+            </div>
+
+            {/* 게시글 목록 */}
+            <div className="flex flex-col">
+              {[
+                {
+                  nickname: "alks***",
+                  time: "2시간 전",
+                  text: "증거가 부족한데 상간 소송 가능할까요?",
+                  detail: "결혼 8년 차인데 남편이 바람을 피우고 있다는 걸 알게 됐어요. 그런데 확실한 사진이나 영상 같은 증거가 없고, 카톡 대화 몇 개랑 늦은 귀가 정도밖에 없어요. 주변에서는 증거 없으면 소송해도 진다고 하는데… 정말 이것만으로는 안 되는 건가요? 너무 억울해서 밤마다 잠을 못 자고 있습니다.",
+                  views: "1,247",
+                  comments: "12",
+                },
+                {
+                  nickname: "hmj0***",
+                  time: "5시간 전",
+                  text: "전업주부인데 재산분할 제대로 받을 수 있나요?",
+                  detail: "결혼 15년 동안 아이 둘 키우면서 집안일만 했어요. 남편 명의로 된 아파트, 자동차, 예금 전부 남편이 번 돈이라 제 몫이 없다고 하더라고요. 시어머니까지 나서서 '니가 뭘 했다고 재산을 달라는 거냐'고… 정말 전업주부는 아무것도 받을 수 없는 건가요?",
+                  views: "2,031",
+                  comments: "23",
+                },
+                {
+                  nickname: "sun8***",
+                  time: "8시간 전",
+                  text: "남편 빚만 몇 천인데, 저보고 대신 갚으라고 하면 어쩌죠?",
+                  detail: "남편이 사업한다면서 제 모르게 대출을 엄청 받아놨어요. 최근에 알게 됐는데 몇 천만 원이 넘더라고요. 이혼하면 빚도 반반 나눠야 한다는 말이 있던데, 제가 모르는 사이에 진 빚도 제가 갚아야 하나요? 아이도 있는데 정말 막막합니다.",
+                  views: "3,482",
+                  comments: "7",
+                },
+              ].map((post, index) => (
+                <div
+                  key={index}
+                  style={{ borderBottom: index < 2 ? `1px solid ${COLORS.border}` : "none" }}
                 >
-                  <item.icon size={20} style={{ color: COLORS.primary }} />
-                </span>
-                <span
-                  className="text-sm md:text-base leading-relaxed"
-                  style={{ color: COLORS.text }}
-                >
-                  {item.text}
-                </span>
-              </div>
-            ))}
+                  <button
+                    onClick={() => setOpenPost(openPost === index ? null : index)}
+                    className="w-full px-5 py-4 text-left transition-all duration-300 hover:bg-gray-50"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-xs"
+                        style={{ backgroundColor: COLORS.primaryBg, color: COLORS.primary }}
+                      >
+                        익
+                      </span>
+                      <span className="text-xs font-medium" style={{ color: COLORS.textMuted }}>{post.nickname}</span>
+                      <span className="text-xs" style={{ color: COLORS.textMuted }}>·</span>
+                      <span className="text-xs" style={{ color: COLORS.textMuted }}>{post.time}</span>
+                    </div>
+                    <p className="text-sm md:text-base font-medium leading-relaxed mb-2" style={{ color: COLORS.text }}>
+                      {post.text}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs" style={{ color: COLORS.textMuted }}>조회 {post.views}</span>
+                        <span className="text-xs" style={{ color: COLORS.textMuted }}>댓글 {post.comments}</span>
+                      </div>
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${openPost === index ? "rotate-180" : ""}`}
+                        style={{ color: COLORS.textMuted }}
+                      />
+                    </div>
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${openPost === index ? "max-h-[500px]" : "max-h-0"}`}>
+                    <div className="px-5 pb-5">
+                      <div
+                        className="p-4 rounded-xl text-sm leading-relaxed mb-4"
+                        style={{ backgroundColor: COLORS.bg, color: COLORS.textLight }}
+                      >
+                        {post.detail}
+                      </div>
+                      <button
+                        onClick={() => scrollToSection("consultation")}
+                        className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:opacity-90"
+                        style={{ backgroundColor: COLORS.primary, color: COLORS.white }}
+                      >
+                        <MessageSquare size={16} />
+                        내 상황과 비슷하다면? 지금 바로 상담 신청
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* 전환 메시지 */}
-          <div className="text-center mt-14">
-            <p className="text-sm md:text-base leading-relaxed" style={{ color: COLORS.textLight }}>
-              감정적으로 대응하다가 증거도 재산도 잃으실 수 있습니다.
-            </p>
-            <p className="text-base md:text-lg font-semibold mt-2" style={{ color: COLORS.text }}>
-              지금 필요한 건 <span style={{ color: COLORS.primary }}>냉철한 전략</span>입니다.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -439,20 +489,20 @@ export default function Home() {
               {
                 num: "01",
                 icon: Target,
-                title: "T성향의 팩트 폭격",
-                desc: "감정에 호소하지 않습니다. 증거와 논리로 상대방을 압박하고, 법리적 근거를 하나하나 쌓아 판사를 설득합니다.",
+                title: "내 일처럼 해결하는 변호사",
+                desc: "사무장 없이 변호사가 직접 의뢰인과 소통하며 사건을 진행합니다. 높은 품질의 서비스를 위해 수임 건수를 제한하고 있으며, 맡은 사건 하나하나에 최선을 다합니다.",
               },
               {
                 num: "02",
                 icon: Search,
                 title: "디테일한 집요함",
-                desc: "문자 한 통, 카드 내역 하나에서 은닉 재산을 찾아냅니다. 작은 단서도 놓치지 않는 집요한 분석력이 판결을 바꿉니다.",
+                desc: "문자 한 통, 카드 내역 하나, SNS 게시물 하나도 놓치지 않습니다. 법원 사실조회·금융거래 추적·부동산 등기 분석까지, 작은 단서에서 시작해 승소의 결정적 증거를 만들어냅니다.",
               },
               {
                 num: "03",
                 icon: Shield,
-                title: "빚까지 해결하는 Total Care",
-                desc: "이혼 전문 + 회생/파산 전문 이중 자격 보유. 이혼 과정의 채무 문제까지 원스톱으로 해결합니다.",
+                title: "재산분할에 특화된 변호사",
+                desc: "이혼 전문 + 회생/파산 전문 이중 자격을 보유한 변호사가 상대방의 은닉 재산을 끝까지 찾아내고, 최대한의 재산분할을 이끌어냅니다.",
               },
             ].map((card, index) => (
               <div
@@ -490,36 +540,48 @@ export default function Home() {
       {/* ═══════════ S4. 성공 사례 ═══════════ */}
       <section className="py-20 md:py-28" style={{ backgroundColor: COLORS.bg }}>
         <div className="max-w-5xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-14">
+          <div className="text-center mb-6">
+            <p className="text-sm font-medium mb-2" style={{ color: COLORS.primary }}>
+              REAL CASES
+            </p>
             <h2 className="text-2xl md:text-3xl font-bold" style={{ color: COLORS.text }}>
               판결문으로 증명하는 실제 승소 사례
             </h2>
+            <p className="text-sm mt-3" style={{ color: COLORS.textMuted }}>
+              * 의뢰인 보호를 위해 개인정보는 비공개 처리되었습니다.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 mt-10">
             {[
               {
                 type: "재산분할",
-                before: "12억 자산가 남편의 특유재산 주장",
-                result: "6억 2천만 원",
                 icon: Scale,
+                image: "/images/successful case 1.png",
+                title: "비상장 주식까지 추적, 재산분할 7억 확보",
+                desc: "남편이 비상장 주식·법인 명의 자산으로 재산을 숨겼으나, 법원 사실조회와 기업 회계 분석을 통해 은닉 자산을 전부 밝혀냈습니다. 아내의 가사노동 기여도를 적극 주장하여 재산분할 7억 원을 확보한 사례입니다.",
+                result: "재산분할 7억 원 확보",
+              },
+              {
+                type: "이혼소송",
+                icon: Gavel,
+                image: "/images/successful case 2.png",
+                title: "바람피운 남편 상대 이혼 승소 + 위자료 확보",
+                desc: "남편의 반복적인 외도로 혼인관계가 파탄난 사건. 카드 내역·숙박 기록·메신저 대화 등 정황 증거를 체계적으로 정리하여 유책배우자임을 입증하고, 이혼 판결과 함께 재산분할과 더불어 위자료까지 받아낸 사례입니다.",
+                result: "이혼 승소 + 위자료 인용",
               },
               {
                 type: "상간소송",
-                before: "증거 부족, 100만 원 합의서 뿐",
-                result: "위자료 1,500만 원",
-                icon: Gavel,
-              },
-              {
-                type: "양육비",
-                before: '소득 0원 주장하는 "배드파더"',
-                result: "월 100만 원",
                 icon: Users,
+                image: "/images/successful case 3.png",
+                title: "인스타그램 증거로 상간 관계 입증 성공",
+                desc: "요즘 많이 사용하는 인스타그램 게시물·스토리·위치 태그·댓글 등 SNS 증거를 활용하여 배우자와 상간자의 부정행위를 입증했습니다. 디지털 증거 분석 전략이 판결을 이끌어낸 대표적인 승소 사례입니다.",
+                result: "상간 위자료 전액 인용",
               },
             ].map((caseItem, index) => (
               <div
                 key={index}
-                className="flex flex-col rounded-2xl overflow-hidden"
+                className="flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg"
                 style={{
                   backgroundColor: COLORS.white,
                   border: `1px solid ${COLORS.border}`,
@@ -527,49 +589,73 @@ export default function Home() {
               >
                 {/* 케이스 헤더 */}
                 <div
-                  className="px-6 py-4 flex items-center gap-3"
+                  className="px-6 py-4 flex items-center justify-between"
                   style={{ backgroundColor: COLORS.primary }}
                 >
-                  <caseItem.icon size={18} style={{ color: COLORS.white }} />
-                  <span className="text-sm font-semibold" style={{ color: COLORS.white }}>
-                    {caseItem.type}
+                  <div className="flex items-center gap-3">
+                    <caseItem.icon size={18} style={{ color: COLORS.white }} />
+                    <span className="text-sm font-semibold" style={{ color: COLORS.white }}>
+                      {caseItem.type}
+                    </span>
+                  </div>
+                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>
+                    실제 판결
                   </span>
                 </div>
 
+                {/* 판결문 이미지 */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden" style={{ backgroundColor: COLORS.bg }}>
+                  <Image
+                    src={caseItem.image}
+                    alt={`${caseItem.type} 판결문`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
                 <div className="p-6 flex-1 flex flex-col">
-                  {/* Before */}
-                  <div className="mb-5">
-                    <span
-                      className="inline-block text-xs font-medium px-2.5 py-1 rounded mb-2"
-                      style={{ backgroundColor: "#fef2f2", color: "#991b1b" }}
-                    >
-                      BEFORE
-                    </span>
-                    <p className="text-sm leading-relaxed" style={{ color: COLORS.textLight }}>
-                      {caseItem.before}
-                    </p>
-                  </div>
+                  {/* 사건 제목 */}
+                  <h4 className="text-base font-bold mb-3 leading-snug" style={{ color: COLORS.text }}>
+                    {caseItem.title}
+                  </h4>
 
-                  {/* 화살표 */}
-                  <div className="flex justify-center my-3">
-                    <ChevronDown size={20} style={{ color: COLORS.primary }} />
-                  </div>
+                  {/* 사건 설명 */}
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: COLORS.textLight }}>
+                    {caseItem.desc}
+                  </p>
 
-                  {/* After */}
+                  {/* 판결 결과 */}
                   <div
                     className="p-4 rounded-xl text-center mt-auto"
-                    style={{ backgroundColor: COLORS.primaryBg }}
+                    style={{ backgroundColor: COLORS.primaryBg, border: `1px solid ${COLORS.primary}20` }}
                   >
-                    <span className="block text-xs mb-1" style={{ color: COLORS.textLight }}>
-                      RESULT
+                    <span className="block text-xs mb-1 font-semibold" style={{ color: COLORS.primary }}>
+                      판결 결과
                     </span>
-                    <span className="text-lg font-bold" style={{ color: COLORS.primary }}>
+                    <span className="block text-lg font-bold" style={{ color: COLORS.primary }}>
                       {caseItem.result}
                     </span>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* 더 많은 성공사례 버튼 */}
+          <div className="text-center mt-10">
+            <a
+              href="https://family.kimnpartners.co.kr/sub/review/successful.php"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-80"
+              style={{
+                backgroundColor: COLORS.primaryBg,
+                color: COLORS.primary,
+              }}
+            >
+              <ExternalLink size={16} />
+              더 많은 성공사례 확인하기
+            </a>
           </div>
         </div>
       </section>
@@ -641,7 +727,7 @@ export default function Home() {
                 {[
                   "대한변호사협회 등록 이혼 전문 변호사",
                   "대한변호사협회 등록 채무자회생 및 파산 전문 변호사",
-                  '유튜브 "조아라 창원변호사" 채널 운영',
+                  '유튜브 "조아라하는창원변호사" 채널 운영',
                 ].map((item, index) => (
                   <li key={index} className="flex items-start gap-3 text-sm" style={{ color: COLORS.textLight }}>
                     <BadgeCheck
