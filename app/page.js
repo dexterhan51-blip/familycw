@@ -80,6 +80,39 @@ export default function Home() {
     content: "",
     privacyAgree: true,
   })
+  const [submitState, setSubmitState] = useState("idle") // idle | loading | success | error
+
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.phone) {
+      alert("성함과 연락처를 입력해 주세요.")
+      return
+    }
+    if (!formData.privacyAgree) {
+      alert("개인정보 수집 및 이용에 동의해 주세요.")
+      return
+    }
+
+    setSubmitState("loading")
+    try {
+      const res = await fetch("/api/consultation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          caseTypes: formData.caseTypes,
+          name: formData.name,
+          phone: formData.phone,
+          content: formData.content,
+        }),
+      })
+
+      if (!res.ok) throw new Error("발송 실패")
+
+      setSubmitState("success")
+      setFormData({ caseTypes: [], name: "", phone: "", content: "", privacyAgree: true })
+    } catch {
+      setSubmitState("error")
+    }
+  }
 
   const scrollToSection = (sectionId) => {
     const el = document.getElementById(sectionId)
@@ -1019,24 +1052,58 @@ export default function Home() {
             </div>
 
             {/* 제출 버튼 */}
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-base font-semibold transition-all duration-300 hover:opacity-90"
-              style={{
-                backgroundColor: COLORS.accent,
-                color: COLORS.white,
-              }}
-            >
-              <Lock size={18} />
-              1:1 비공개 상담 신청하기
-            </button>
+            {submitState === "success" ? (
+              <div className="text-center py-6">
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                  style={{ backgroundColor: COLORS.accentLight }}
+                >
+                  <Check size={28} style={{ color: COLORS.accent }} />
+                </div>
+                <p className="text-lg font-bold mb-2" style={{ color: COLORS.text }}>
+                  상담 신청이 완료되었습니다
+                </p>
+                <p className="text-sm" style={{ color: COLORS.textLight }}>
+                  빠른 시간 내에 변호사가 직접 연락드리겠습니다.
+                </p>
+                <button
+                  onClick={() => setSubmitState("idle")}
+                  className="mt-4 text-sm underline"
+                  style={{ color: COLORS.accent }}
+                >
+                  추가 상담 신청
+                </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={submitState === "loading"}
+                  className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-base font-semibold transition-all duration-300 hover:opacity-90 disabled:opacity-60"
+                  style={{
+                    backgroundColor: COLORS.accent,
+                    color: COLORS.white,
+                  }}
+                >
+                  <Lock size={18} />
+                  {submitState === "loading" ? "발송 중..." : "1:1 비공개 상담 신청하기"}
+                </button>
 
-            <div className="flex items-center justify-center gap-2 mt-4">
-              <Clock size={14} style={{ color: COLORS.textMuted }} />
-              <p className="text-xs" style={{ color: COLORS.textMuted }}>
-                야간/주말 문자 상담 가능 · 접수 후 24시간 내 회신
-              </p>
-            </div>
+                {submitState === "error" && (
+                  <p className="text-center text-sm mt-3" style={{ color: "#e74c3c" }}>
+                    발송에 실패했습니다. 전화로 문의해 주세요.
+                  </p>
+                )}
+
+                <div className="flex items-center justify-center gap-2 mt-4">
+                  <Clock size={14} style={{ color: COLORS.textMuted }} />
+                  <p className="text-xs" style={{ color: COLORS.textMuted }}>
+                    야간/주말 문자 상담 가능 · 접수 후 24시간 내 회신
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
