@@ -240,41 +240,19 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 이미지 영역 */}
+            {/* 영상 영역 */}
             <div className="order-1 lg:order-2">
               <div
-                className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden"
+                className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-lg"
                 style={{ backgroundColor: COLORS.bg }}
               >
-                {/* 실제 이미지가 들어갈 자리 */}
-                <Image
-                  src="/images/profile-main.jpg"
-                  alt="조아라 변호사"
-                  fill
-                  className="object-cover"
-                  priority
-                  onError={(e) => {
-                    e.target.style.display = 'none'
-                    e.target.parentElement.querySelector('.placeholder').style.display = 'flex'
-                  }}
+                <iframe
+                  src="https://www.youtube.com/embed/Hf2kQX5sDHo?autoplay=1&mute=1&loop=1&playlist=Hf2kQX5sDHo"
+                  title="조아라 변호사 소개 영상"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
                 />
-                <div
-                  className="placeholder absolute inset-0 items-center justify-center hidden"
-                  style={{ backgroundColor: COLORS.accentLight }}
-                >
-                  <div className="text-center">
-                    <p className="text-sm mb-2" style={{ color: COLORS.textMuted }}>이미지 위치</p>
-                    <p className="text-xs" style={{ color: COLORS.textMuted }}>/public/images/profile-main.jpg</p>
-                  </div>
-                </div>
-                {/* 하단 정보 오버레이 */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 p-6"
-                  style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.7))" }}
-                >
-                  <p className="text-white text-sm opacity-80">법무법인 김앤파트너스 창원</p>
-                  <p className="text-white text-xl font-bold">조아라 변호사</p>
-                </div>
               </div>
             </div>
           </div>
