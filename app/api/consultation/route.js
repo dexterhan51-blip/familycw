@@ -136,7 +136,13 @@ export async function POST(request) {
       console.error("잔디 알림 전송 실패:", jandiResult.reason)
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({
+      success: true,
+      sheetStatus: sheetResult.status,
+      sheetError: sheetResult.status === "rejected" ? sheetResult.reason?.message : null,
+      jandiStatus: jandiResult.status,
+      jandiError: jandiResult.status === "rejected" ? jandiResult.reason?.message : null,
+    })
   } catch (error) {
     console.error("상담 신청 처리 실패:", error)
     return NextResponse.json(
