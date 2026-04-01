@@ -2,8 +2,8 @@ import { NextResponse } from "next/server"
 import { google } from "googleapis"
 
 // 구글 시트 설정 상수
-const SPREADSHEET_ID = "1pDe71kcg1AZHTNheV9EIsb6zxFyInwoV5bf_Q-eLtyM"
-const SHEET_GID = 1929186399
+const SPREADSHEET_ID = "1YFR7rYs-WpGstrIuceMfhf8oBXAz1RHlVsk3UxCLAEw"
+const SHEET_GID = 1601747132
 
 // Base64로 인코딩된 서비스 계정 JSON을 디코딩하여 인증 객체 생성
 function getGoogleAuth() {
