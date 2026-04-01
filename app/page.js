@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import {
   Phone,
@@ -81,6 +81,18 @@ export default function Home() {
     privacyAgree: true,
   })
   const [submitState, setSubmitState] = useState("idle") // idle | loading | success | error
+  const [utmParams, setUtmParams] = useState({})
+
+  // URL에서 UTM 파라미터 캡처
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const utm = {}
+    ;["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach((key) => {
+      const value = params.get(key)
+      if (value) utm[key] = value
+    })
+    setUtmParams(utm)
+  }, [])
 
   const handleSubmit = async () => {
     if (!formData.name || !formData.phone) {
@@ -102,6 +114,7 @@ export default function Home() {
           name: formData.name,
           phone: formData.phone,
           content: formData.content,
+          utm: utmParams,
         }),
       })
 

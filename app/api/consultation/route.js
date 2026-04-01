@@ -39,7 +39,7 @@ async function getSheetNameByGid(sheets) {
 }
 
 // 구글 시트에 상담 데이터를 저장하는 함수
-async function sendToGoogleSheet({ name, phone, caseTypeText, content }) {
+async function sendToGoogleSheet({ name, phone, caseTypeText, content, utm }) {
   const auth = getGoogleAuth()
   const sheets = google.sheets({ version: "v4", auth })
 
@@ -51,13 +51,24 @@ async function sendToGoogleSheet({ name, phone, caseTypeText, content }) {
     timeZone: "Asia/Seoul",
   })
 
-  // 시트에 새 행 추가
+  // 시트에 새 행 추가 (UTM 파라미터 포함)
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${sheetName}!A:E`,
+    range: `${sheetName}!A:J`,
     valueInputOption: "USER_ENTERED",
     requestBody: {
-      values: [[timestamp, name, phone, caseTypeText, content || "내용 없음"]],
+      values: [[
+        timestamp,
+        name,
+        phone,
+        caseTypeText,
+        content || "내용 없음",
+        utm.utm_source || "",
+        utm.utm_medium || "",
+        utm.utm_campaign || "",
+        utm.utm_term || "",
+        utm.utm_content || "",
+      ]],
     },
   })
 }
@@ -110,7 +121,7 @@ async function sendToJandi({ name, phone, caseTypeText, content }) {
 
 export async function POST(request) {
   try {
-    const { caseTypes, name, phone, content } = await request.json()
+    const { caseTypes, name, phone, content, utm = {} } = await request.json()
 
     // 유효성 검사
     if (!name || !phone) {
@@ -124,7 +135,7 @@ export async function POST(request) {
 
     // 구글 시트 저장과 잔디 알림을 동시에 실행
     const results = await Promise.allSettled([
-      sendToGoogleSheet({ name, phone, caseTypeText, content }),
+      sendToGoogleSheet({ name, phone, caseTypeText, content, utm }),
       sendToJandi({ name, phone, caseTypeText, content }),
     ])
 
