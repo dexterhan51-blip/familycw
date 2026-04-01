@@ -1,5 +1,108 @@
-import nodemailer from "nodemailer"
 import { NextResponse } from "next/server"
+import { google } from "googleapis"
+
+// 구글 시트 설정 상수
+const SPREADSHEET_ID = "1pDe71kcg1AZHTNheV9EIsb6zxFyInwoV5bf_Q-eLtyM"
+const SHEET_GID = 1929186399
+
+// 서비스 계정 인증 객체 생성 함수
+function getGoogleAuth() {
+  return new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  })
+}
+
+// gid로 시트 이름을 조회하는 함수
+async function getSheetNameByGid(sheets) {
+  const spreadsheet = await sheets.spreadsheets.get({
+    spreadsheetId: SPREADSHEET_ID,
+  })
+
+  // gid에 해당하는 시트 이름 찾기
+  const targetSheet = spreadsheet.data.sheets.find(
+    (s) => s.properties.sheetId === SHEET_GID
+  )
+
+  if (!targetSheet) {
+    throw new Error(`gid ${SHEET_GID}에 해당하는 시트를 찾을 수 없습니다.`)
+  }
+
+  return targetSheet.properties.title
+}
+
+// 구글 시트에 상담 데이터를 저장하는 함수
+async function sendToGoogleSheet({ name, phone, caseTypeText, content }) {
+  const auth = getGoogleAuth()
+  const sheets = google.sheets({ version: "v4", auth })
+
+  // 시트 이름 조회
+  const sheetName = await getSheetNameByGid(sheets)
+
+  // 현재 한국 시간 생성
+  const timestamp = new Date().toLocaleString("ko-KR", {
+    timeZone: "Asia/Seoul",
+  })
+
+  // 시트에 새 행 추가
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `${sheetName}!A:E`,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[timestamp, name, phone, caseTypeText, content || "내용 없음"]],
+    },
+  })
+}
+
+// 잔디 웹훅으로 상담 알림을 보내는 함수
+async function sendToJandi({ name, phone, caseTypeText, content }) {
+  const jandiUrl = process.env.JANDI_WEBHOOK_URL
+
+  // 웹훅 URL이 설정되지 않은 경우 건너뜀
+  if (!jandiUrl) {
+    console.warn("JANDI_WEBHOOK_URL이 설정되지 않아 잔디 알림을 건너뜁니다.")
+    return
+  }
+
+  // 잔디 웹훅으로 상담 알림 전송
+  const response = await fetch(jandiUrl, {
+    method: "POST",
+    headers: {
+      Accept: "application/vnd.tosslab.jandi-v2+json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      body: "📋 새로운 상담 신청이 접수되었습니다.",
+      connectColor: "#1e3a5f",
+      connectInfo: [
+        {
+          title: "성함",
+          description: name,
+        },
+        {
+          title: "연락처",
+          description: phone,
+        },
+        {
+          title: "사건 유형",
+          description: caseTypeText,
+        },
+        {
+          title: "상담 내용",
+          description: content || "내용 없음",
+        },
+      ],
+    }),
+  })
+
+  if (!response.ok) {
+    throw new Error(`잔디 알림 전송 실패: ${response.status}`)
+  }
+}
 
 export async function POST(request) {
   try {
@@ -13,55 +116,29 @@ export async function POST(request) {
       )
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: Number(process.env.SMTP_PORT) === 465,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    })
-
     const caseTypeText = caseTypes.length > 0 ? caseTypes.join(", ") : "미선택"
 
-    await transporter.sendMail({
-      from: process.env.SMTP_USER,
-      to: "jane20524@gmail.com",
-      subject: `[창원 상담신청] ${name}님 - ${caseTypeText}`,
-      html: `
-        <div style="font-family: 'Malgun Gothic', sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
-          <h2 style="color: #2d2d2d; border-bottom: 2px solid #9e5e5a; padding-bottom: 12px;">
-            새로운 상담 신청이 접수되었습니다
-          </h2>
-          <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
-            <tr>
-              <td style="padding: 12px; background: #f5f2f1; font-weight: bold; width: 120px; border: 1px solid #d9d5d4;">성함</td>
-              <td style="padding: 12px; border: 1px solid #d9d5d4;">${name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px; background: #f5f2f1; font-weight: bold; border: 1px solid #d9d5d4;">연락처</td>
-              <td style="padding: 12px; border: 1px solid #d9d5d4;">${phone}</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px; background: #f5f2f1; font-weight: bold; border: 1px solid #d9d5d4;">사건 유형</td>
-              <td style="padding: 12px; border: 1px solid #d9d5d4;">${caseTypeText}</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px; background: #f5f2f1; font-weight: bold; border: 1px solid #d9d5d4;">상담 내용</td>
-              <td style="padding: 12px; border: 1px solid #d9d5d4; white-space: pre-wrap;">${content || "내용 없음"}</td>
-            </tr>
-          </table>
-          <p style="margin-top: 16px; color: #888; font-size: 12px;">
-            * 이 메일은 창원 랜딩페이지 상담 폼에서 자동 발송되었습니다.
-          </p>
-        </div>
-      `,
-    })
+    // 구글 시트 저장과 잔디 알림을 동시에 실행
+    const results = await Promise.allSettled([
+      sendToGoogleSheet({ name, phone, caseTypeText, content }),
+      sendToJandi({ name, phone, caseTypeText, content }),
+    ])
+
+    const [sheetResult, jandiResult] = results
+
+    // 구글 시트 저장 실패 시 경고 로그
+    if (sheetResult.status === "rejected") {
+      console.error("구글 시트 저장 실패:", sheetResult.reason)
+    }
+
+    // 잔디 알림 실패 시 경고 로그
+    if (jandiResult.status === "rejected") {
+      console.error("잔디 알림 전송 실패:", jandiResult.reason)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("이메일 발송 실패:", error)
+    console.error("상담 신청 처리 실패:", error)
     return NextResponse.json(
       { error: "상담 신청 중 오류가 발생했습니다." },
       { status: 500 }
