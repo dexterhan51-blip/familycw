@@ -5,12 +5,16 @@ import { google } from "googleapis"
 const SPREADSHEET_ID = "1pDe71kcg1AZHTNheV9EIsb6zxFyInwoV5bf_Q-eLtyM"
 const SHEET_GID = 1929186399
 
-// 서비스 계정 인증 객체 생성 함수
+// Base64로 인코딩된 서비스 계정 JSON을 디코딩하여 인증 객체 생성
 function getGoogleAuth() {
+  const decoded = JSON.parse(
+    Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT_BASE64, "base64").toString("utf-8")
+  )
+
   return new google.auth.GoogleAuth({
     credentials: {
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      client_email: decoded.client_email,
+      private_key: decoded.private_key,
     },
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   })
