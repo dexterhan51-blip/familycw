@@ -1,4 +1,4 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
+const SITE_URL = "https://family.kimnpartners-law.com";
 
 export default function robots() {
   return {

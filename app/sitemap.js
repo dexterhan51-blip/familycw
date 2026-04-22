@@ -1,7 +1,7 @@
 const WP_API =
   "https://wordpress-1568541-6194044.cloudwaysapps.com/wp-json/wp/v2";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
+const SITE_URL = "https://family.kimnpartners-law.com";
 
 export default async function sitemap() {
   const staticPages = [
